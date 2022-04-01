@@ -1,4 +1,7 @@
+from audioop import reverse
 from functools import cache
+
+# longest common subseq
 
 
 def lcs(str1, str2):
@@ -23,3 +26,9 @@ print(lcs("ACCGGTCGAGTGCGCGGAAGCCGGCCGAA",
 
 
 # print(lcs("ABCBDAB", "BDCABA"))
+
+# Longest palindrome subsequence
+def lps(string):
+    return lcs(string, string[::-1])
+
+print(lps("character"))
