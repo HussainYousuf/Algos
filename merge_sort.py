@@ -15,6 +15,8 @@ import math
 #         arr.append(right[0])
 #         merge(left, right[1:], arr)
 
+inversions = 0
+
 
 def merge_sort(arr):
     if(len(arr) < 2):
@@ -31,10 +33,12 @@ def merge_sort(arr):
     j = 0
     k = 0
     while (k < len(arr)):
-        if(left[i] < right[j]):
+        if(left[i] <= right[j]):
             arr[k] = left[i]
             i += 1
         else:
+            global inversions
+            inversions += (len(left) - 1)
             arr[k] = right[j]
             j += 1
         k += 1
@@ -45,4 +49,5 @@ def sort(arr):
     return arr
 
 
-print(sort([5, 4, 2, 4, 6, 1, 3]))
+print(sort([5, 4,3,2]))
+print(inversions)
