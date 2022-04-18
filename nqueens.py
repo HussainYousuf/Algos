@@ -1,5 +1,4 @@
 
-from numpy import append
 import pyglet
 from pyglet import shapes
 
@@ -7,9 +6,9 @@ from pyglet import shapes
 def main():
     queens = []
 
-    def get_all_queens(rows=[None]*4, cur_row=0):
+    def get_all_queens(rows=[None]*8, cur_row=0):
         if(cur_row >= len(rows)):
-            queens.append(rows)
+            queens.append(rows[:])
         else:
             for col in range(len(rows)):
                 legal = True
@@ -19,12 +18,13 @@ def main():
                         break
                 if(legal):
                     rows[cur_row] = col
-                    get_all_queens(rows[:], cur_row + 1)
+                    get_all_queens(rows, cur_row + 1)
 
     get_all_queens()
+    print(len(queens))
     return queens
 
-# main()
+main()
 
 
 def draw(rows):
@@ -58,4 +58,4 @@ def draw(rows):
     # window.on_draw = on_draw
     pyglet.app.run()
 
-draw(main()[1])
+# draw(main()[1])
