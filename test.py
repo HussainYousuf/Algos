@@ -129,3 +129,45 @@ class Solution:
             return temp
         else:
             return 0 
+
+
+import itertools
+from functools import cache
+
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        # if(nums[:4] == [0,0,0,0] and target == 0): return [[0,0,0,0]]
+        subset_sum = self.subset_sum
+        res = {}
+        self.memo = {}
+        tmp = subset_sum(tuple(sorted(nums)), target)
+        # print(tmp)
+        for i in tmp:
+            if(not i): continue
+            res[tuple(sorted(i))] = True
+        return [list(i) for i in res.keys()]
+
+    def subset_sum(self, arr, target, acc=()):
+        # if((target, acc) in self.memo): 
+        #     print(self.memo)
+        #     return self.memo[(target, acc)]
+        
+        subset_sum = self.subset_sum
+        
+        if(len(acc) == 4 and target == 0):
+            return (acc,)
+        if(not arr or len(acc) > 4):
+            return ()
+
+        n = arr[0]
+        arr = arr[1:]
+        
+        return subset_sum(arr, target, acc) + subset_sum(arr, target - n, (*acc, n))
+        # print(x,target,acc)
+        # self.memo[(target, acc)] = x
+            
+        y = subset_sum(arr, target - n, (*acc, n))
+        # print(y, target - n, (*acc, n))
+        # self.memo[(target, (*acc, n))] = y
+        
+        return x + y
